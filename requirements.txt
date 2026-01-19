@@ -1,0 +1,9 @@
+pandas>=2.0
+matplotlib>=3.8
+tqdm>=4.66
+
+# Testing
+pytest>=8.3
+
+# Amplify SDK
+# amplify>=1.0
