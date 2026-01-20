@@ -15,5 +15,11 @@
 ## Usage
 
 ```bash
+# Export .env
+set -a
+source .env
+set +a 
+
+# Run and record
 python -m src.cli run --ns 4 8 10 --out data/results/results.csv
 ```

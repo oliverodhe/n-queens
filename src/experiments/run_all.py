@@ -66,15 +66,31 @@ def run_suite(ns: List[int], out_csv: Path) -> pd.DataFrame:
             "returncode": r2["returncode"],
         })
 
-        # QUBO Amplify (TODO: placeholder)
-        r3 = solve_with_amplify(n=n, num_reads=50, timeout_s=5.0)
+        # QUBO Amplify
+        r3 = solve_with_amplify(
+            n=n,
+            num_reads=100,
+            timeout_s=1.0,
+            w_row=5.0,
+            w_col=5.0,
+            w_diag=1.0,
+        )
+
         rows.append({
             "approach": "qubo_amplify",
+            "solver": "amplify_ae",
             "n": n,
             "ok": r3.get("ok", False),
-            "valid": False,  # TODO: will update when decoding is implemented
+            "valid": r3.get("valid", False),
             "time_s": r3.get("time_s"),
             "returncode": None,
+            "energy": r3.get("energy"),
+            "success_rate": r3.get("success_rate"),
+            "num_reads": r3.get("num_reads"),
+            "timeout_s": r3.get("timeout_s"),
+            "w_row": (r3.get("weights") or {}).get("w_row"),
+            "w_col": (r3.get("weights") or {}).get("w_col"),
+            "w_diag": (r3.get("weights") or {}).get("w_diag"),
         })
 
     df = pd.DataFrame(rows)

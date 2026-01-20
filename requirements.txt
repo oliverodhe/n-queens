@@ -6,4 +6,4 @@ tqdm>=4.66
 pytest>=8.3
 
 # Amplify SDK
-# amplify>=1.0
+# amplify==1.4.1
