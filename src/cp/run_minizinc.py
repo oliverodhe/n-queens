@@ -12,7 +12,7 @@ def write_dzn(dzn_path: Path, n: int) -> None:
 def run_minizinc(
     model_path: Path,
     dzn_path: Path,
-    solver: Optional[str] = None,
+    solver: Optional[str] = "gecode",
     timeout_s: Optional[int] = None,
 ) -> Dict[str, Any]:
     cmd = ["minizinc"]

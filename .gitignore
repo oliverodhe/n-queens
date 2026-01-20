@@ -7,3 +7,4 @@ data/results/*.png
 .idea/
 .vscode/
 .pytest_cache/
+data/results/logs/
