@@ -12,14 +12,32 @@
 - **Fixstars amplify:** [amplify.fixstars.com](https://amplify.fixstars.com/en/docs/quickstart.html)
 - **MiniZinc:** [minizinc.org](https://www.minizinc.org/doc-2.6.4/en/index.html)
 
-## Usage
+## Environment
+
+Add the amplify API token to a `.env` file and export:
 
 ```bash
-# Export .env
 set -a
 source .env
 set +a 
+```
 
-# Run and record
-python -m src.cli run --ns 4 8 10 --out data/results/results.csv
+## CLI
+
+Genarate results:
+
+```bash
+python -m src.cli run --ns 8 10 12 14 16 --out data/results/results.csv
+```
+
+Summarize:
+
+```bash
+python -m src.cli summarize --in data/results/results.csv --out data/results/summary.csv
+```
+
+Plot:
+
+```bash
+python -m src.cli plot --summary data/results/summary.csv --outdir data/results
 ```

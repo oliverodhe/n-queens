@@ -8,4 +8,5 @@ data/results/*.png
 .vscode/
 .pytest_cache/
 data/results/logs/
+data/results/archive/
 .env

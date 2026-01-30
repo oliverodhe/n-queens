@@ -11,12 +11,12 @@ constraint forall(c in 1..n) (
   sum(r in 1..n)(x[r,c]) = 1
 );
 
-% Diagonals: r - c constant (top-left to bottom-right)
+% Diagonals: r - c constant
 constraint forall(d in -(n-1)..(n-1)) (
   sum(r in 1..n, c in 1..n where r - c = d)(x[r,c]) <= 1
 );
 
-% Anti-diagonals: r + c constant (top-right to bottom-left)
+% Anti-diagonals: r + c constant
 constraint forall(s in 2..(2*n)) (
   sum(r in 1..n, c in 1..n where r + c = s)(x[r,c]) <= 1
 );

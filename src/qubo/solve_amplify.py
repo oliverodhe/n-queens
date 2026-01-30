@@ -7,8 +7,7 @@ from src.utils.validate import is_valid_board_x
 from src.qubo.build_qubo import build_nqueens_qubo
 
 
-def _to_int_matrix(x_eval: Any) -> List[List[int]]:
-    """Convert Amplify evaluate() output into a plain Python list[list[int]]"""
+def to_int_matrix(x_eval: Any) -> List[List[int]]:
     if hasattr(x_eval, "tolist"):
         return [[int(v) for v in row] for row in x_eval.tolist()]
     return [[int(v) for v in row] for row in x_eval]
@@ -64,18 +63,18 @@ def solve_with_amplify(
     best = result.best
     energy = float(best.objective)
 
-    # Decode: variable array has evaluate(values) to map variables -> values
+    # Decode
     x_eval = build.x.evaluate(best.values)
-    x_mat = _to_int_matrix(x_eval)
+    x_mat = to_int_matrix(x_eval)
     valid = is_valid_board_x(x_mat)
 
-    # Success rate across returned solutions (result can be iterated; timing doc shows iterating solutions)
+    # Success rate across returned solutions
     try:
         sols = list(result)
         if len(sols) > 0:
             valid_ct = 0
             for sol in sols:
-                x_i = _to_int_matrix(build.x.evaluate(sol.values))
+                x_i = to_int_matrix(build.x.evaluate(sol.values))
                 if is_valid_board_x(x_i):
                     valid_ct += 1
             success_rate = valid_ct / len(sols)
@@ -96,3 +95,4 @@ def solve_with_amplify(
         "num_reads": num_reads,
         "timeout_s": timeout_s,
     }
+    
